@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="resume-btn" onclick="handleResume()">Download Resume</button>
+    </nav>
+
+    <section id="home" class="active-section">
+        <div class="profile-picture">
+            <img src="C:\Users\algieworks\Downloads\673602487_1373104434865911_8510738006146152404_n.jpg" alt="Profile picture">
+        </div>
+        <div class="home-intro">
+            <h1>ALGIEVER NGANGAC</h1>
+            <p>BSIT 1 SOUTH 6.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="card">
+            <h2>ABOUT ME</h2>
+            <p>I'm not really passionate about Information Technology, I really like it and my passion is repairing motors or machines because that's what I really like, holding tools and turning screws. I also like to eat, especially healthy foods, especially vegetables.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="contact-grid">
+            <div class="clickable-part"><h3>FIXING ENGINE</h3></div>
+            <div class="clickable-part"><h3>JAVA CODING</h3></div>
+            <div class="clickable-part"><h3>ELECTRICAL WIRINGS</h3></div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2>Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <img src="C:\Users\algieworks\Downloads\680003006_1979568023444401_4293183317707552386_n.jpg" alt="Achievement 1">
+                <p>Research defended.</p>
+            </div>
+            <div class="achievement-card">
+                <img src="C:\Users\algieworks\Downloads\677846216_3020369571494938_8553216441931556559_n.jpg" alt="Achievement 2">
+                <p>Proudly with high honnors.</p>
+            </div>
+            <div class="achievement-card">
+                <img src="C:\Users\algieworks\Pictures\Screenshot 2026-04-24 061454.png" alt="Achievement 3">
+                <p>First runner up pantra concept.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="close-btn" id="lightboxClose">×</button>
+        <img src="" alt="Expanded achievement" id="lightboxImage">
+    </div>
+
+    <section id="contact">
+        <h2>GET IN TOUCH</h2>
+        <div class="contact-grid">
+            <a href="mailto:alpe.ngangac.au@phinmaed.com" class="clickable-part">
+                <h3>Email Me</h3>
+                <p>alpe.ngangac.au@phinmaed.com</p>
+            </a>
+
+            <a href="tel:09534939773" class="clickable-part">
+                <h3>Call Me</h3>
+                <p>09534939773</p>
+            </a>
+
+            <a href="#" class="clickable-part">
+                <h3>VISIT PROFILE</h3>
+                <p>https://www.facebook.com/algiever.perez.ngangac/</p>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Navigation display logic: show one page at a time
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active-section');
+                });
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active-section');
+                }
+            });
+        });
+
+        // Resume Download Logic
+        function handleResume() {
+            // Use the new resume file
+            const resumeUrl = 'file:///C:/Users/algieworks/Downloads/Black%20and%20White%20Clean%20Professional%20A4%20Resume.pdf';
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.download = 'Algiever_Ngangac_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Achievement lightbox logic
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.achievement-card img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImage.src = img.src;
+                lightboxOverlay.classList.add('active');
+            });
+        });
+
+        const closeLightbox = () => {
+            lightboxOverlay.classList.remove('active');
+            lightboxImage.src = '';
+        };
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxOverlay.addEventListener('click', (event) => {
+            if (event.target === lightboxOverlay) closeLightbox();
+        });
+    </script>
+</body>
+</html>
